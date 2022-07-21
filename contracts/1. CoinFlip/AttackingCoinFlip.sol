@@ -4,7 +4,7 @@ import "./CoinFlip.sol";
 
 import "hardhat/console.sol";
 
-error AttackingCoinFlip__Call_Unsuccessful();
+error AttackingCoinFlip__CallUnsuccessful();
 
 contract AttackingCoinFlip {
     address public contractAddress;
@@ -29,7 +29,7 @@ contract AttackingCoinFlip {
         (bool success, ) = contractAddress.call(abi.encodeWithSignature("flip(bool)", side));
         
         if (!success) {
-            revert AttackingCoinFlip__Call_Unsuccessful();
+            revert AttackingCoinFlip__CallUnsuccessful();
         }
 
     }
